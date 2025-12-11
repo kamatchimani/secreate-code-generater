@@ -1,0 +1,42 @@
+def encode(message, shift):
+    encoded = ""
+    for char in message:
+        if char.isalpha():
+            base = ord('A') if char.isupper() else ord('a')
+            encoded += chr((ord(char) - base + shift) % 26 + base)
+        else:
+            encoded += char  # Keep spaces, numbers, punctuation
+    return encoded
+
+
+def decode(message, shift):
+    return encode(message, -shift)
+
+
+def menu():
+    while True:
+        print("\n--- SECRET CODE GENERATOR ---")
+        print("1. Encode a message")
+        print("2. Decode a message")
+        print("3. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            msg = input("Enter message to encode: ")
+            shift = int(input("Enter shift number: "))
+            print("Encoded Message:", encode(msg, shift))
+
+        elif choice == "2":
+            msg = input("Enter message to decode: ")
+            shift = int(input("Enter shift number: "))
+            print("Decoded Message:", decode(msg, shift))
+
+        elif choice == "3":
+            print("Exiting program...")
+            break
+
+        else:
+            print("Invalid choice! Try again.")
+
+menu()
