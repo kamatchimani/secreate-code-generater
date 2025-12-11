@@ -1,0 +1,58 @@
+def feed(pet):
+    pet["hunger"] = max(0, pet["hunger"] - 20)
+    pet["happiness"] = max(0, pet["happiness"] - 5)
+    print("\nYou fed your pet!")
+
+def play(pet):
+    pet["happiness"] = min(100, pet["happiness"] + 20)
+    pet["hunger"] = min(100, pet["hunger"] + 10)
+    print("\nYou played with your pet!")
+
+def check_status(pet):
+    print(f"\nPet Status:")
+    print(f"Hunger: {pet['hunger']}")
+    print(f"Happiness: {pet['happiness']}")
+
+def auto_change(pet):
+    pet["hunger"] = min(100, pet["hunger"] + 5)
+    pet["happiness"] = max(0, pet["happiness"] - 3)
+
+def game():
+    name = input("Enter your pet's name: ")
+    pet = {"hunger": 50, "happiness": 50}
+    actions = 0
+
+    while True:
+        print(f"\n--- {name}'s Menu ---")
+        print("1. Feed")
+        print("2. Play")
+        print("3. Check Status")
+        print("4. Quit")
+
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            feed(pet)
+        elif choice == "2":
+            play(pet)
+        elif choice == "3":
+            check_status(pet)
+        elif choice == "4":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice!")
+
+        actions += 1
+
+        if actions % 2 == 0:
+            auto_change(pet)
+
+        if pet["hunger"] >= 100:
+            print("\nYour pet became too hungry! GAME OVER.")
+            break
+        if pet["happiness"] <= 0:
+            print("\nYour pet became too sad! GAME OVER.")
+            break
+
+game()
